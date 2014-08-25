@@ -55,8 +55,7 @@ public class Heap<T extends Comparable<T>> {
 		while (2 * k <= size) {
 			child = 2 * k;
 
-			if (child != size
-					&& heapArray[child].compareTo(heapArray[child + 1]) > 0) {
+			if (child != size && heapArray[child].compareTo(heapArray[child + 1]) > 0) {
 				child++;
 			}
 			if (tmp.compareTo(heapArray[child]) > 0) {
@@ -95,21 +94,9 @@ public class Heap<T extends Comparable<T>> {
 		} else {
 			T min = heapArray[0];
 			heapArray[0] = heapArray[size--];
-			percolatingDown(1);
+			percolatingDown(0);
 			return min;
 		}
-	}
-
-	public boolean removeRoot() {
-		T root = heapArray[1];
-		T exchange = heapArray[heapArray.length - 1];
-		heapArray[1] = exchange;
-		heapArray[heapArray.length - 1] = root;
-		size--;
-		for (int k = size / 2; k > 0; k--) {
-			percolatingDown(k);
-		}
-		return false;
 	}
 
 	public void insert(T x) {

@@ -9,7 +9,6 @@ public class HeapBasedPriorityQueue<T extends Comparable<T>> {
 	// Returns true if it works.
 	// Efficiency Class: Theta()
 	public boolean offer(T data) {
-		System.out.println("Adding " + data);
 		boolean result = false;
 		heap.insert(data);
 		result = true;
@@ -28,8 +27,7 @@ public class HeapBasedPriorityQueue<T extends Comparable<T>> {
 	// Efficiency Class: Theta()
 	public T poll() {
 		T result = (T) heap.getRootValue();
-		System.out.println(result);
-		heap.removeRoot();
+		heap.deleteMin();
 		return result;
 	}
 	

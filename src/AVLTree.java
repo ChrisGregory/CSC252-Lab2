@@ -22,39 +22,19 @@ public class AVLTree<T extends Comparable<T>> {
 	}
 
 	private Node insert(T value, Node node) {
-		if (node == null) {
-			node = new Node(value);
-		} else if (value.compareTo((T) node.data) < 0) {
-			node.left = insert(value, node.left);
-			if (height(node.left) - height(node.right) == 2) {
-				if (value.compareTo((T) node.left.data) < 0) {
-					node = leftRotation(node);
-				} else {
-					node = doubleLeftRotation(node);
-				}
-			}
-		} else if (value.compareTo((T) node.data) > 0) {
-			node.right = insert(value, node.right);
-			if (height(node.right) - height(node.left) == 2) {
-				if (value.compareTo((T) node.right.data) > 0) {
-					node = rightRotation(node);
-				} else {
-					node = doubleRightRotation(node);
-				}
-			}
-		}
-		node.height();
+		//recursive inserter
 		return node;
 	}
 	
-	//THIS IS THE LAST THING. YOU CAN DO IT.
 	public void remove(T value){
-		
+		//Find the value rectursively.
+		//Rebalance after finding it.
 	}
 
 	public T findMin() {
 		return (T) findMin(root).data;
 	}
+	
 	private Node findMin(Node node) {
 		if (node == null)
 			return node;
@@ -76,17 +56,6 @@ public class AVLTree<T extends Comparable<T>> {
 			t = t.right;
 		}
 		return t;
-	}
-	public T find(T x) {
-		return (T) find(x, root).data;
-	}
-
-	public void empty() {
-		root = null;
-	}
-
-	public boolean isEmpty() {
-		return root == null;
 	}
 
 	private Node find(T value, Node node) {

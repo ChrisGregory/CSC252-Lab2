@@ -7,9 +7,11 @@ public class AVLBasedPriorityQueue<T extends Comparable<T>> {
 	 */
 
 	AVLTree<T> tree;
+	int size;
 
 	public AVLBasedPriorityQueue() {
 		tree = new AVLTree<T>();
+		size = 0;
 	}
 
 	// Add value into the right place in the AVL tree.
@@ -18,6 +20,7 @@ public class AVLBasedPriorityQueue<T extends Comparable<T>> {
 	public boolean offer(T data) {
 		boolean result = false;
 		tree.insert(data);
+		size++;
 		result = true;
 		return result;
 	}
@@ -36,6 +39,12 @@ public class AVLBasedPriorityQueue<T extends Comparable<T>> {
 	public T poll() {
 		T result = tree.findMax();
 		tree.remove(result);
+		size--;
 		return result;
 	}
+
+	public int size() {
+		return size;
+	}
+
 }
