@@ -16,25 +16,42 @@ public class AVLTree<T extends Comparable<T>> {
 	public AVLTree() {
 		root = null;
 	}
-	
+
 	public void insert(T x) {
 		root = insert(x, root);
 	}
 
 	private Node insert(T value, Node node) {
-		//recursive inserter
+		if (node == null)
+			node = new Node(value);
+		else if (value.compareTo((T) node.data) < 0) {
+			node.left = insert(value, node.left);
+			if (node.balanceFactor() == 2)
+				if (value.compareTo((T) node.left.data) < 0)
+					node = leftRotation(node);
+				else
+					node = doubleLeftRotation(node);
+		} else if (value.compareTo((T) node.data) > 0) {
+			node.right = insert(value, node.right);
+			if (node.balanceFactor() == 2)
+				if (value.compareTo((T) node.right.data) > 0)
+					node = rightRotation(node);
+				else
+					node = doubleRightRotation(node);
+		}
+		System.out.println("Inserting " + value + " into AVL tree.");
 		return node;
 	}
-	
-	public void remove(T value){
-		//Find the value rectursively.
-		//Rebalance after finding it.
+
+	public void remove(T value) {
+		// Find the value rectursively.
+		// Rebalance after finding it.
 	}
 
 	public T findMin() {
 		return (T) findMin(root).data;
 	}
-	
+
 	private Node findMin(Node node) {
 		if (node == null)
 			return node;
@@ -45,9 +62,12 @@ public class AVLTree<T extends Comparable<T>> {
 	}
 
 	public T findMax() {
-		return (T) findMax(root).data;
+		if(root != null){
+			return (T) findMax(root).data;
+		}
+		return null;
 	}
-	
+
 	private Node findMax(Node t) {
 		if (t == null) {
 			return t;
@@ -77,19 +97,23 @@ public class AVLTree<T extends Comparable<T>> {
 
 	private static Node leftRotation(Node root) {
 		Node pivot = root.left;
-		root.left = pivot.right;
-		pivot.right = root;
-		root.height();
-		pivot.height();
+		if (pivot != null) {
+			root.left = pivot.right;
+			pivot.right = root;
+			root.height();
+			pivot.height();
+		}
 		return pivot;
 	}
 
 	private static Node rightRotation(Node root) {
 		Node pivot = root.right;
-		root.right = pivot.left;
-		pivot.left = root;
-		root.height();
-		pivot.height();
+		if (pivot != null) {
+			root.right = pivot.left;
+			pivot.left = root;
+			root.height();
+			pivot.height();
+		}
 		return pivot;
 	}
 

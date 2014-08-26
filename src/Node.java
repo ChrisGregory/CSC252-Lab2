@@ -56,15 +56,20 @@ public class Node<T extends Comparable<T>> implements Comparable {
 	}
 
 	private int height(Node node) {
-		int leftHeight = 0;
-		int rightHeight = 0;
-		if (left != null) {
-			leftHeight = height(left);
+		if(node != null){
+			int leftHeight = 0;
+			int rightHeight = 0;
+			if (node.left != null) {
+				leftHeight = height(node.left);
+			}
+			if (node.right != null) {
+				rightHeight = height(node.right);
+			}
+			return Math.max(leftHeight, rightHeight) + 1;
 		}
-		if (right != null) {
-			rightHeight = height(right);
+		else {
+			return -1;
 		}
-		return Math.max(leftHeight, rightHeight) + 1;
 	}
 
 	public boolean isLeaf() {
